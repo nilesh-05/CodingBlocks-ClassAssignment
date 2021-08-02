@@ -54,7 +54,7 @@ a {
 
 .nav-link {
 	font-size: 1.8rem;
-	color: white;
+	color: white !important;
 	padding: 5px;
 	transition: 0.25s ease background-color;
 }
@@ -67,6 +67,11 @@ a {
 .nav-logo {
 	font-size: 4rem;
 	font-weight: 500;
+	text-decoration: none;
+	color: white;
+}
+.nav-logo:hover {
+	text-decoration: none;
 	color: white;
 }
 
@@ -248,7 +253,6 @@ input:focus {
 }
 
 .a {
-	border: 1px solid red;
 	width: 30%;
 	background-color: rgb(250, 169, 19);
 	border-top-left-radius: 10px;
@@ -321,12 +325,9 @@ input:focus {
 @media screen and (max-width: 70rem) {
 	.contact {
 		flex-direction: column;
-		border: 3px solid green;
 	}
 	.a {
 		width: 100%;
-		/* border: 1px solid red;
-	   */
 		border-radius: 10px;
 	}
 	.b {
@@ -372,7 +373,7 @@ footer a {
 	text-align: center;
 	border-radius: 50%;
 	border: 2px solid white;
-	margin: 0 8px;
+	margin: 15px 8px;
 	color: white;
 }
 .social > a:hover {
