@@ -85,13 +85,14 @@ a {
 	}
 
 	.nav-menu.active {
+		margin-top: 2.5rem;
 		left: 0;
+		background-color: #f59438;
 	}
 
 	.nav-item {
 		margin: 2.5rem 0;
 	}
-
 	.hamburger {
 		display: block;
 		cursor: pointer;
@@ -234,40 +235,147 @@ img {
 
 /* FORM STARTS */
 
-.form_wrapper {
+.contact {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 50rem;
-	margin-bottom: 50px;
+	margin-top: 9rem;
+	width: 90%;
+	border-radius: 10px;
 	box-shadow: 1px 1px 14px -4px rgba(0, 0, 0, 1);
-	border-radius: 2rem;
 }
 
-.left {
-	display: flex;
-	flex: 1;
-	background-color: #f59438;
+input:focus {
+	border: none !important;
+}
+
+.a {
+	border: 1px solid red;
+	width: 30%;
+	background-color: rgb(250, 169, 19);
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	color: white;
 	text-align: center;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
-	border-top-left-radius: 2rem;
-	border-bottom-left-radius: 2rem;
-}
-.right {
-	display: flex;
-	justify-content: start;
-	height: 100%;
-	flex: 2;
-	background-color: whitesmoke;
-	border-top-right-radius: 2rem;
-	border-bottom-right-radius: 2rem;
 }
 
-.left > h1 {
+.a > h1 {
+	padding-left: 5rem;
 	font-size: 6rem !important;
 	color: white;
 	font-weight: bolder;
 	text-align: left;
+}
+
+.a p {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.b {
+	height: 100%;
+	width: 70%;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 1.5rem;
+}
+
+.b form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.b input {
+	border: 2px solid rgb(250, 169, 19);
+	padding: 0.7rem;
+	margin: 0.7rem;
+	width: 90%;
+	font-size: small;
+}
+
+.b textarea {
+	border: 2px solid rgb(250, 169, 19);
+	padding: 0.7rem;
+	margin: 0.7rem;
+	width: 90%;
+	height: 12rem;
+	font-size: small;
+}
+.b button {
+	border: 1px solid rgb(250, 169, 19);
+	background-color: rgb(250, 169, 19);
+	color: white;
+	font-size: small;
+	margin-top: 5rem;
+	width: 80%;
+	padding: 0.7rem;
+	align-self: center;
+}
+
+.b button:hover {
+	cursor: pointer;
+}
+
+@media screen and (max-width: 70rem) {
+	.contact {
+		flex-direction: column;
+		border: 3px solid green;
+	}
+	.a {
+		width: 100%;
+		/* border: 1px solid red;
+	   */
+		border-radius: 10px;
+	}
+	.b {
+		width: 100%;
+	}
+}
+
+/* FORM ENDS */
+
+/* FOOTER STARTS */
+
+footer {
+	width: 100%;
+	margin-top: 10rem;
+	height: 15rem;
+	background-color: rgb(46, 44, 44);
+	color: grey;
+	margin-bottom: 0;
+	padding: 20px;
+	text-align: center;
+}
+
+footer a {
+	width: 5rem;
+	color: red;
+	z-index: 8;
+	font-size: 5rem;
+	background-color: white;
+}
+
+.social {
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+.social > a {
+	font-size: 24px;
+	background-color: rgb(250, 169, 19);
+	width: 50px;
+	height: 50px;
+	line-height: 40px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+	border: 2px solid white;
+	margin: 0 8px;
+	color: white;
+}
+.social > a:hover {
+	text-decoration: none;
+	color: white !important;
 }
