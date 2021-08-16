@@ -1,0 +1,71 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.container {
+	top: 20px;
+	height: 60vh;
+	margin: 0 auto;
+}
+.upper {
+	background-color: lightblue;
+	height: 20vh;
+	overflow: hidden;
+	animation: colorAnimation 12s infinite;
+	animation-timing-function: linear;
+}
+.lower {
+	background-color: lightgreen;
+	height: 40vh;
+}
+.sun {
+	z-index: 1;
+	border-radius: 50%;
+	width: 80px;
+	background-color: yellow;
+	height: 80px;
+	position: relative;
+	animation: sunAnimation 12s ease-in-out infinite;
+}
+@keyframes sunAnimation {
+	0% {
+		top: 150px;
+		left: 0vw;
+		background-color: orange;
+	}
+	25% {
+		top: 30px;
+		left: 25vw;
+		background-color: rgb(255, 219, 16);
+	}
+	50% {
+		top: 10px;
+		left: 50vw;
+		background-color: yellow;
+	}
+	75% {
+		top: 30px;
+		left: 75vw;
+	}
+	100% {
+		top: 70px;
+		left: 100vw;
+	}
+}
+@keyframes colorAnimation {
+	0% {
+		background-color: pink;
+	}
+	25% {
+		background-color: blue;
+	}
+	50% {
+		background-color: lightblue;
+	}
+	75% {
+		background-color: darkblue;
+	}
+	100% {
+		background-color: pink;
+	}
+}
