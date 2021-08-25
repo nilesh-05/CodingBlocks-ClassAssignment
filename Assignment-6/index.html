@@ -8,34 +8,30 @@
 		<link rel="stylesheet" href="./styles.css" />
 	</head>
 	<body>
-		<div id="root">
+		<div class="todo-table">
 			<div>
-				<div class="todo-table">
-					<div>
-						<div class="form">
-							<input
-								type="text"
-								name="item"
-								placeholder="Add New Task..."
-								spellcheck="false"
-								value=""
-								id="myInput"
-							/><button class="addTask" onclick="addItem()">+</button>
-						</div>
-						<ul id="output"></ul>
-					</div>
+				<div class="form">
+					<input
+						type="text"
+						name="item"
+						placeholder="Add New Task..."
+						spellcheck="false"
+						value=""
+						id="myInput"
+					/><button class="addTask" onclick="addItem()">+</button>
 				</div>
-				<div class="footer">
-					<div class="footer">
-						Made with 💖 by
-						<a
-							rel="noopener noreferrer"
-							target="_blank"
-							href="https://github.com/nilesh-05"
-							>nilesh
-						</a>
-					</div>
-				</div>
+				<ul id="output"></ul>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer">
+				Made with 💖 by
+				<a
+					rel="noopener noreferrer"
+					target="_blank"
+					href="https://github.com/nilesh-05"
+					>nilesh
+				</a>
 			</div>
 		</div>
 		<script src="./app.js"></script>
