@@ -1,55 +1,80 @@
-var taskList = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < taskList.length; i++) {
-	var span = document.createElement("SPAN");
-	var txt = document.createTextNode("\u00D7");
-	span.className = "close";
-	span.appendChild(txt);
-	taskList[i].appendChild(span);
-}
+const todoList = [];
 
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-	close[i].onclick = function () {
-		var div = this.parentElement;
-		div.style.display = "none";
-	};
-}
+const todoListElement = document.querySelector("#output");
 
-const addItem = () => {
-	var li = document.createElement("li");
-	var ul = document.querySelector("ul");
-	var inputValue = document.getElementById("myInput").value;
-	var t = document.createTextNode(inputValue);
-	li.appendChild(t);
-	if (inputValue === "") {
-		alert("Cannot add empty task!");
+document.querySelector(".addTask").addEventListener("click", addTodo);
+document.querySelector("#myInput").addEventListener("keydown", function (e) {
+	if (e.keyCode == 13) {
+		addTodo();
+	}
+});
+
+function addTodo() {
+	const todoText = document.querySelector("#myInput").value;
+
+	if (todoText == "") {
+		alert("You did not enter any item");
 	} else {
-		document.getElementById("output").appendChild(li);
-	}
-	document.getElementById("myInput").value = "";
-
-	var span = document.createElement("SPAN");
-	var txt = document.createTextNode("\u00D7");
-	span.className = "close";
-	span.appendChild(txt);
-	li.className = "draggable";
-	var attr = document.createAttribute("draggable");
-	attr.value = "true";
-	li.setAttributeNode(attr);
-	li.appendChild(span);
-	// ul.appendChild(li);
-	addEventsDragAndDrop(li);
-	for (i = 0; i < close.length; i++) {
-		close[i].onclick = function () {
-			var div = this.parentElement;
-			div.style.display = "none";
+		const todoObject = {
+			id: todoList.length,
+			todoText: todoText,
+			isDone: false,
 		};
-	}
-};
 
-// Dragging
+		todoList.unshift(todoObject);
+		displayTodos();
+	}
+}
+
+function doneTodo(todoId) {
+	const selectedTodoIndex = todoList.findIndex((item) => item.id == todoId);
+
+	todoList[selectedTodoIndex].isDone
+		? (todoList[selectedTodoIndex].isDone = false)
+		: (todoList[selectedTodoIndex].isDone = true);
+	displayTodos();
+}
+
+function deleteItem(x) {
+	todoList.splice(
+		todoList.findIndex((item) => item.id == x),
+		1,
+	);
+	displayTodos();
+}
+
+function displayTodos() {
+	todoListElement.innerHTML = "";
+	document.querySelector("#myInput").value = "";
+
+	todoList.forEach((item) => {
+		const listElement = document.createElement("li");
+		const delBtn = document.createElement("i");
+
+		listElement.innerHTML = item.todoText;
+		listElement.setAttribute("data-id", item.id);
+		listElement.setAttribute("draggable", true);
+		delBtn.setAttribute("data-id", item.id);
+		delBtn.classList.add("far");
+		delBtn.classList.add("fa-trash-alt");
+		delBtn.setAttribute("data-id", item.id);
+
+		listElement.addEventListener("click", function (e) {
+			const selectedId = e.target.getAttribute("data-id");
+			doneTodo(selectedId);
+		});
+
+		delBtn.addEventListener("click", function (e) {
+			const delId = e.target.getAttribute("data-id");
+			deleteItem(delId);
+		});
+
+		todoListElement.appendChild(listElement);
+		listElement.appendChild(delBtn);
+		addEventsDragAndDrop(listElement);
+	});
+}
+
 function dragStart(e) {
 	this.style.opacity = "0.4";
 	dragSrcEl = this;
@@ -96,6 +121,7 @@ function addEventsDragAndDrop(el) {
 	el.addEventListener("drop", dragDrop, false);
 	el.addEventListener("dragend", dragEnd, false);
 }
+
 var listItens = document.querySelectorAll(".draggable");
 [].forEach.call(listItens, function (item) {
 	addEventsDragAndDrop(item);

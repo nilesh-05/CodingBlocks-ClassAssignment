@@ -5,7 +5,8 @@
 }
 
 body {
-	background: #fff !important;
+	/* background: #fff !important; */
+	background: #2b2a33 !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -16,8 +17,8 @@ body {
 	position: relative;
 	width: 75vw;
 	border-radius: 5px;
-	background: #f9f6f7;
-	box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #fff;
+	background: #131314;
+	box-shadow: 20px 20px 60px #494949, -20px -20px 60px rgb(71, 70, 70);
 	margin: 0 auto;
 	padding: 20px;
 	box-sizing: border-box;
@@ -33,7 +34,7 @@ body {
 input[type="text"] {
 	width: 70%;
 	padding: 20px;
-	background: #f9f6f7;
+	background: #131314;
 	border: 0;
 	float: left;
 	outline: none;
@@ -45,18 +46,20 @@ button {
 	padding: 20px;
 	width: 25%;
 	float: left;
-	background: #eee;
+	background: #131314;
 	border: 0;
 	box-sizing: border-box;
-	color: #000;
+	color: #fff;
 	cursor: pointer;
 	outline: none;
 	font-size: 20px;
-	transition: background 1s;
+	border-radius: 5px;
+	transition: background 0.2s;
 }
 
 button:hover {
 	background: #cacaca;
+	color: #131314;
 }
 
 ul {
@@ -64,6 +67,7 @@ ul {
 	padding: 0;
 	margin: 0;
 	transition: all ease-in-out 0.05s;
+	color: #fff;
 }
 
 li {
@@ -108,19 +112,20 @@ h1 {
 	position: absolute;
 	bottom: 20px;
 	right: 0;
+	color: #fff;
 	left: 0;
 	text-align: center;
 }
 
 a {
-	color: #000;
 	font-size: 1em;
 	text-decoration: none;
 	transition: all 1s;
+	color: red;
 }
 
 a:hover {
-	color: red;
+	color: #eee;
 	font-size: 1.5em;
 }
 
@@ -143,4 +148,17 @@ a:hover {
 		text-align: center;
 		padding: 12px 0;
 	}
+}
+
+li > i {
+	position: absolute;
+	right: 0;
+	padding: 20px;
+	margin-right: 7px;
+	transition: all 0.2s;
+}
+
+li > i:hover {
+	background-color: red;
+	color: white;
 }
