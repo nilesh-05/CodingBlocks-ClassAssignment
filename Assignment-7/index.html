@@ -5,6 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+	<style>
+		.footer {
+			position: absolute;
+			bottom: 20px;
+			right: 0;
+			color: black;
+			left: 0;
+			text-align: center;
+		}
+				
+		a {
+			font-size: 1em;
+			text-decoration: none;
+			transition: all 1s;
+			color: red;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: black;
+			font-size: 1.5em;
+		}
+	</style>
   </head>
   <body>
     <body>
@@ -29,9 +52,17 @@
         <div id="content">
 
         </div>
-        <footer class="mt-5 p-3 text-center bg-light">
-             Weather.js &copy;
-        </footer>
+        <div class="footer">
+			<div class="footer">
+				Made with 💖 by
+				<a
+					rel="noopener noreferrer"
+					target="_blank"
+					href="https://github.com/nilesh-05"
+					>nilesh </a
+				><br />
+			</div>
+		</div>
   </body>
   <script src="fetch.js"></script>
   <script src="ui.js"></script>
