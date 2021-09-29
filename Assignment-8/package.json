@@ -1,0 +1,16 @@
+{
+	"name": "log-register",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "nodemon ./index.js"
+	},
+	"author": "Nilesh",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"mongoose": "^6.0.8",
+		"nodemon": "^2.0.13"
+	}
+}
