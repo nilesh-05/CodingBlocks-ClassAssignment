@@ -1,0 +1,49 @@
+<%- include("./partials/header") %> <%- include("./partials/navbar") %>
+<div class="container pt-5">
+	<form action="/formpage" method="POST">
+		<div class="form-group">
+			<label for="exampleInputEmail1">Email address</label>
+			<input
+				type="email"
+				class="form-control"
+				id="exampleInputEmail1"
+				aria-describedby="emailHelp"
+				placeholder="Enter email"
+				name="mail"
+			/>
+			<small id="emailHelp" class="form-text text-muted"
+				>We'll never share your email with anyone else.</small
+			>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputNumber">Phone Number</label>
+			<input
+				type="number"
+				id="exampleInputNumber"
+				class="form-control"
+				placeholder="Enter Phone Number"
+				name="phone"
+			/>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputName">Name</label>
+			<input
+				type="text"
+				id="exampleInputName"
+				class="form-control"
+				placeholder="Enter Your Name"
+				name="name"
+			/>
+		</div>
+		<div class="form-group form-check">
+			<input
+				type="checkbox"
+				class="form-check-input"
+				id="exampleCheck1"
+				name="checkout"
+			/>
+			<label class="form-check-label" for="exampleCheck1">Check me out</label>
+		</div>
+		<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
