@@ -1,14 +1,17 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const path = require("path");
+const connectDB = require("./config/db");
+const User = require("./models/User");
+
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(
-	bodyParser.urlencoded({
-		extended: true,
-	}),
-);
+connectDB();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -26,13 +29,19 @@ app.get("/formpage", (req, res) => {
 	res.render("formpage");
 });
 
-app.post("/formpage", (req, res) => {
-	var email = req.body.mail;
-	var phoneNumber = Number(req.body.phone);
-	var name = req.body.name;
-	var checkout = req.body.checkout == undefined ? "no" : "yes";
-	console.log(email, phoneNumber, name, checkout);
-	res.render("index");
+app.post("/formpage", async (req, res) => {
+	var email = await req.body.mail;
+	var phone = await Number(req.body.phone);
+	var name = await req.body.name;
+	var checkInorOut = await req.body.checkInorOut;
+	var newCustomer = new User({ name, email, phone, checkInorOut });
+	await newCustomer
+		.save()
+		.then(() => {
+			console.log("user saved");
+			return res.redirect("/");
+		})
+		.catch((err) => console.log(err));
 });
 
 app.listen(PORT, () => console.log(`server up and running at ${PORT}`));
