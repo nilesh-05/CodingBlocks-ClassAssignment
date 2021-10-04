@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const connectDB = require("./config/db");
 const User = require("./models/User");
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,9 +40,32 @@ app.post("/formpage", async (req, res) => {
 		.save()
 		.then(() => {
 			console.log("user saved");
+			sendMail(email, checkInorOut);
 			return res.redirect("/");
 		})
 		.catch((err) => console.log(err));
 });
+
+const sendMail = (email, checkInorOut) => {
+	const sgMail = require("@sendgrid/mail");
+	const apiKey = `${process.env.SENDGRID_API_KEY}`;
+	// console.log("apiKey -> " + apiKey);
+	sgMail.setApiKey(apiKey);
+	const msg = {
+		to: email, // Change to your recipient
+		from: "nilesh0411.cse19@chitkara.edu.in", // Change to your verified sender
+		subject: "Sending with SendGrid is Fun",
+		text: `Thank you for chosing us. You just ${checkInorOut}. `,
+		html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+	};
+	sgMail
+		.send(msg)
+		.then(() => {
+			console.log("Email sent");
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+};
 
 app.listen(PORT, () => console.log(`server up and running at ${PORT}`));
