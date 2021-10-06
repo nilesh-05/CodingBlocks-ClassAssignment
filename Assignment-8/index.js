@@ -1,22 +1,22 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
-const connectDB = require("./config/db");
-const User = require("./models/User");
-require("dotenv").config();
-
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-connectDB();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const mongoose = require("mongoose");
+const path = require("path");
+require("dotenv").config();
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
+app.use(
+	express.urlencoded({
+		extended: true,
+	}),
+);
+
+const User = require("./models/schema.js");
 
 app.get("/", (req, res) => {
 	res.render("index");
@@ -30,42 +30,51 @@ app.get("/formpage", (req, res) => {
 	res.render("formpage");
 });
 
-app.post("/formpage", async (req, res) => {
-	var email = await req.body.mail;
-	var phone = await Number(req.body.phone);
-	var name = await req.body.name;
-	var checkInorOut = await req.body.checkInorOut;
-	var newCustomer = new User({ name, email, phone, checkInorOut });
-	await newCustomer
-		.save()
-		.then(() => {
-			console.log("user saved");
-			sendMail(email, checkInorOut);
-			return res.redirect("/");
+app.post("/formpage", (req, res) => {
+	var email = req.body.mail;
+	var checkInorOut = req.body.checkInorOut;
+
+	const result = new User({
+		name: req.body.name,
+		email: req.body.mail,
+		phone: req.body.phone,
+		checkInorOut: req.body.checkInorOut,
+	});
+	result.save();
+	const d = new Date();
+	const message = {
+		to: email,
+		from: "nilesh0411.cse19@chitkara.edu.in",
+		subject: "Creted By Nilesh",
+		html: `<h1>You ${checkInorOut} at The Shopper's Stop at ${d.getHours()}:${d.getMinutes()} </h1>`,
+	};
+
+	sgMail
+		.send(message)
+		.then((res) => {
+			console.log("Sent Successfully");
+			res.render("index");
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => {
+			console.log(err);
+		});
 });
 
-const sendMail = (email, checkInorOut) => {
-	const sgMail = require("@sendgrid/mail");
-	const apiKey = `${process.env.SENDGRID_API_KEY}`;
-	// console.log("apiKey -> " + apiKey);
-	sgMail.setApiKey(apiKey);
-	const msg = {
-		to: email, // Change to your recipient
-		from: "nilesh0411.cse19@chitkara.edu.in", // Change to your verified sender
-		subject: "Sending with SendGrid is Fun",
-		text: `Thank you for chosing us. You just ${checkInorOut}. `,
-		html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-	};
-	sgMail
-		.send(msg)
-		.then(() => {
-			console.log("Email sent");
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-};
+app.listen(port, () => {
+	console.log(`Connected To Port  ${port}`);
+});
 
-app.listen(PORT, () => console.log(`server up and running at ${PORT}`));
+const DB = `mongodb+srv://${process.env.DB_USER_NAME}:${process.env.DB_PASSWORD}@register.col7h.mongodb.net/register?retryWrites=true&w=majority`;
+
+const connectDB = async () => {
+	try {
+		await mongoose.connect(DB, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+		console.log("Mongo DB connected");
+	} catch (err) {
+		console.error(err.message);
+	}
+};
+connectDB();
